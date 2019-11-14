@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, session, redirect, \
-    url_for, flash
+    url_for, flash, abort
 
 DATABASE = ''
 USERNAME = 'admin'
@@ -33,6 +33,13 @@ def logout():
     """User logout/authentication/session management."""
     session.pop('logged_in', None)
     flash('You were logged out')
+    return redirect(url_for('index'))
+
+@app.route('/add', methods=['POST'])
+def add_entry():
+    if not session.get('logged_in'):
+        abort(401)
+    flash('New entry was successfully posted')
     return redirect(url_for('index'))
 
 if __name__ == "__main__":
