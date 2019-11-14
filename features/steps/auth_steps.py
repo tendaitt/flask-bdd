@@ -2,7 +2,7 @@ from behave import *
 
 @given(u'flaskr is set up')
 def flask_is_setup(context):
-    assert context.client
+    assert context.client and context.db
 
 @given(u'we log in with "{username}" and "{password}"')
 @when(u'we log in with "{username}" and "{password}"')
