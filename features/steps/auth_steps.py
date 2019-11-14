@@ -32,6 +32,10 @@ def add(context, title, text):
     )
     assert context.page
 
+@then(u'we should see the post with "{title}" and "{text}" as the title and text')
+def entry(context, title, text):
+    assert str.encode(title) and str.encode(text) in context.page.data
+
 @given(u'we are not logged in')
 def logout(context):
     context.page = context.client.get('/logout', follow_redirects=True)
